@@ -23,6 +23,7 @@ class Solution {
     public int solution(int[] info, int[][] edges) {        
         answer = 0;
         counted = new int[info.length];
+        // info.length = 12일때 양이 12마리이면 인덱스 넘어가기 때문에 +1 처리
         visited = new boolean[info.length][info.length+1][info.length+1];
         adj_list = new ArrayList[info.length];
         
