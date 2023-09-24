@@ -31,7 +31,7 @@ class Solution {
         int[][] temp = new int[M][M];
         for(int i=0; i<M; i++) { 
             for(int j=0; j<M; j++) {
-                temp[i][j] = key[M-1-j][i]; // 시계방향 90도 회전
+                temp[i][j] = key[M-1-j][i];
             }
         }
         return temp;
@@ -48,7 +48,7 @@ class Solution {
                 if(key[i][j] == 1) {
                     if(x+i<0 || x+i>=N+M-1 || y+j<0 || y+j>=N+M-1) continue;
                     if(temp[x+i][y+j] == 1) return false;
-                    temp[x+i][y+j] ^= 1; // XOR 연산을 통해 자물쇠의 홈을 채움
+                    temp[x+i][y+j] = 1;
                 }
             }
         }
