@@ -66,7 +66,7 @@ class Solution {
             Pattern pattern = Pattern.compile("<a href=\"https://(.+?)\">");
             Matcher matcher = pattern.matcher(page.html);
             while (matcher.find()) {
-                String externalUrl = matcher.group(1).toLowerCase(); // 외부 URL 소문자로 변경
+                String externalUrl = matcher.group(1);
                 if (map.containsKey(externalUrl)) {
                     map.get(externalUrl).linkScore += (double) page.defaultScore / page.linkCount;
                 }
