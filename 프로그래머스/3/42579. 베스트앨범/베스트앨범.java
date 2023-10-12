@@ -32,34 +32,33 @@ class Solution {
 
         // 장르 내림차순
         List<String> sortedGenres = new ArrayList<>(genresMap.keySet());
-        sortedGenres.sort((g1, g2) -> {
-            int play1 = genresMap.get(g1).stream().mapToInt(music -> music.play).sum();
-            int play2 = genresMap.get(g2).stream().mapToInt(music -> music.play).sum();
-            return play2 - play1;
+        sortedGenres.sort(new Comparator<String>() {
+            @Override
+            public int compare(String g1, String g2) {
+                int play1 = 0;
+                int play2 = 0;
+                for (Music music : genresMap.get(g1)) play1 += music.play;
+                for (Music music : genresMap.get(g2)) play2 += music.play;
+                return play2 - play1;
+            }
         });
 
-        // 베스트 앨범에 추가할 노래 목록
+        // 최대 2개의 곡 수록
         List<Integer> list = new ArrayList<>();
-
-        // 각 장르에서 최대 2개의 Music를 선택하여 베스트 앨범에 추가
         for (String genre : sortedGenres) {
             List<Music> musicList = genresMap.get(genre);
-            musicList.sort(Music::compareTo);
+            Collections.sort(musicList);
             int count = 0;
             for (Music music : musicList) {
                 list.add(music.num);
                 count++;
-                if (count >= 2) {
-                    break;
-                }
+                if (count >= 2) break;
             }
         }
 
-        // 결과 배열 초기화
         int[] answer = new int[list.size()];
-        for (int i = 0; i < list.size(); i++) {
-            answer[i] = list.get(i);
-        }
+        for (int i = 0; i < list.size(); i++) answer[i] = list.get(i);
+        
         return answer;
     }
     
