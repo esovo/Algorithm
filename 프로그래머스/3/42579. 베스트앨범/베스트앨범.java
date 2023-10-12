@@ -22,7 +22,7 @@ class Solution {
         int idx = 0;
 
         // 각 장르별 분류
-        for (int i = 0; i < genres.length; i++) {
+        for (int i=0; i<genres.length; i++) {
             Music m = new Music(i, plays[i]);
             if (!genresMap.containsKey(genres[i])) {
                 genresMap.put(genres[i], new ArrayList<>());
@@ -57,7 +57,7 @@ class Solution {
         }
 
         int[] answer = new int[list.size()];
-        for (int i = 0; i < list.size(); i++) answer[i] = list.get(i);
+        for (int i=0; i<list.size(); i++) answer[i] = list.get(i);
         
         return answer;
     }
