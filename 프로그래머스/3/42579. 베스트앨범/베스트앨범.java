@@ -19,7 +19,6 @@ class Solution {
 
     public int[] solution(String[] genres, int[] plays) {
         Map<String, List<Music>> genresMap = new HashMap<>();
-        int idx = 0;
 
         // 각 장르별 분류
         for (int i=0; i<genres.length; i++) {
@@ -35,8 +34,7 @@ class Solution {
         sortedGenres.sort(new Comparator<String>() {
             @Override
             public int compare(String g1, String g2) {
-                int play1 = 0;
-                int play2 = 0;
+                int play1 = 0, play2 = 0;
                 for (Music music : genresMap.get(g1)) play1 += music.play;
                 for (Music music : genresMap.get(g2)) play2 += music.play;
                 return play2 - play1;
