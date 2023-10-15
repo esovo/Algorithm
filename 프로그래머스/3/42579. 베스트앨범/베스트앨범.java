@@ -12,8 +12,8 @@ class Solution {
 
         @Override
         public int compareTo(Music m) {
-            if (this.play == m.play) return this.num - m.num;
-            return m.play - this.play;
+            if (this.play == m.play) return this.num-m.num;
+            return m.play-this.play;
         }
     }
 
@@ -37,7 +37,7 @@ class Solution {
                 int play1 = 0, play2 = 0;
                 for (Music music : genresMap.get(g1)) play1 += music.play;
                 for (Music music : genresMap.get(g2)) play2 += music.play;
-                return play2 - play1;
+                return play2-play1;
             }
         });
 
