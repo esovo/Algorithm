@@ -6,9 +6,9 @@ class Solution {
         int[][] max = new int[n][n];
         int[][] min = new int[n][n];
         
+        // 숫자와 연산자 분리
         int[] numbers = new int[n];
         char[] operators = new char[n-1];
-        
         for (int i=0; i<arr.length; i++) {
             if (i%2 == 0) numbers[i/2] = Integer.parseInt(arr[i]);
             else operators[i/2] = arr[i].charAt(0);
@@ -20,7 +20,7 @@ class Solution {
             min[i][i] = numbers[i];
         }
         
-        // 최댓값, 최솟값 계산
+        // 부분식으로 최댓값, 최솟값 계산
         for (int len=2; len<=n; len++) {
             for (int i=0; i<=n-len; i++) {
                 int j = i+len-1;
