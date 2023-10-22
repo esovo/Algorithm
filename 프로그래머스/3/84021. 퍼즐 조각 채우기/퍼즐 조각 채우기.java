@@ -10,38 +10,35 @@ public class Solution {
         }
     }
     
-    static int len, answer;
+    static int len;
     static int[] dr = {1, 0, -1, 0};
     static int[] dc = {0, 1, 0, -1};
     static boolean[][] boardVisited, tableVisited;
-    static Map<Integer, List<int[][]>> boardMap, puzzleMap;
     
     public int solution(int[][] game_board, int[][] table) {
-        answer = 0;
         len = game_board.length;
-        boardVisited = new boolean[len][len];
-        tableVisited = new boolean[len][len];
-        boardMap = new HashMap<>();
-        puzzleMap = new HashMap<>();
+        boolean[][] boardVisited = new boolean[len][len];
+        boolean[][] tableVisited = new boolean[len][len];
+        Map<Integer, List<int[][]>> boardMap = new HashMap<>();
+        Map<Integer, List<int[][]>> tableMap = new HashMap<>();
 
         for(int i=0; i<len; i++) {
             for(int j=0; j<len; j++) {
                 if(!boardVisited[i][j] && game_board[i][j] == 0) bfs(i, j, 0, game_board, boardVisited, boardMap);
-                if(!tableVisited[i][j] && table[i][j] == 1) bfs(i, j, 1, table, tableVisited, puzzleMap);
+                if(!tableVisited[i][j] && table[i][j] == 1) bfs(i, j, 1, table, tableVisited, tableMap);
             }
         }
 
-        for(int cnt : puzzleMap.keySet()) {
-            for(int[][] puzzle : puzzleMap.get(cnt)) {
-                int[][] rotatedPuzzle = puzzle;
-
+        int answer = 0;
+        for(int cnt : tableMap.keySet()) {
+            for(int[][] puzzle : tableMap.get(cnt)) {
                 for(int i=0; i<=3; i++) {
-                    rotatedPuzzle = rotate(rotatedPuzzle);
+                    puzzle = rotate(puzzle);
                     boolean isChecked = false;
 
                     if(boardMap.containsKey(cnt)) {
                         for(int[][] board : boardMap.get(cnt)) {
-                            if(match(board, rotatedPuzzle)) {
+                            if(match(board, puzzle)) {
                                 answer += cnt;
                                 boardMap.get(cnt).remove(board);
                                 isChecked = true;
@@ -114,7 +111,7 @@ public class Solution {
         visited[x][y] = true;
         square.add(new Point(x, y));
 
-        while (!queue.isEmpty()) {
+        while(!queue.isEmpty()) {
             Point p = queue.poll();
 
             for(int i=0; i<4; i++) {
