@@ -13,15 +13,16 @@ public class Solution {
     static int len, answer;
     static int[] dr = {1, 0, -1, 0};
     static int[] dc = {0, 1, 0, -1};
-    static Queue<Point> queue = new LinkedList<>();
-    static Map<Integer, List<int[][]>> boardMap = new HashMap<>();
-    static Map<Integer, List<int[][]>> puzzleMap = new HashMap<>();
+    static boolean[][] boardVisited, tableVisited;
+    static Map<Integer, List<int[][]>> boardMap, puzzleMap;
     
     public int solution(int[][] game_board, int[][] table) {
         answer = 0;
         len = game_board.length;
-        boolean[][] boardVisited = new boolean[len][len];
-        boolean[][] tableVisited = new boolean[len][len];
+        boardVisited = new boolean[len][len];
+        tableVisited = new boolean[len][len];
+        boardMap = new HashMap<>();
+        puzzleMap = new HashMap<>();
 
         for (int i=0; i<len; i++) {
             for (int j=0; j<len; j++) {
@@ -107,6 +108,7 @@ public class Solution {
 
     // 빈칸 또는 퍼즐 구할 때 사용할 BFS
     private void bfs(int x, int y, int value, int[][] board, boolean[][] visited, Map<Integer, List<int[][]>> map) {
+        Queue<Point> queue = new LinkedList<>();
         List<Point> square = new ArrayList<>();
         queue.add(new Point(x, y));
         visited[x][y] = true;
