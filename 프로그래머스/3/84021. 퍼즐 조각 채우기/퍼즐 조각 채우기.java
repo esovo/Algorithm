@@ -13,7 +13,6 @@ public class Solution {
     static int len;
     static int[] dr = {1, 0, -1, 0};
     static int[] dc = {0, 1, 0, -1};
-    static boolean[][] boardVisited, tableVisited;
     
     public int solution(int[][] game_board, int[][] table) {
         len = game_board.length;
