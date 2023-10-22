@@ -24,24 +24,24 @@ public class Solution {
         boardMap = new HashMap<>();
         puzzleMap = new HashMap<>();
 
-        for (int i=0; i<len; i++) {
-            for (int j=0; j<len; j++) {
-                if (!boardVisited[i][j] && game_board[i][j] == 0) bfs(i, j, 0, game_board, boardVisited, boardMap);
-                if (!tableVisited[i][j] && table[i][j] == 1) bfs(i, j, 1, table, tableVisited, puzzleMap);
+        for(int i=0; i<len; i++) {
+            for(int j=0; j<len; j++) {
+                if(!boardVisited[i][j] && game_board[i][j] == 0) bfs(i, j, 0, game_board, boardVisited, boardMap);
+                if(!tableVisited[i][j] && table[i][j] == 1) bfs(i, j, 1, table, tableVisited, puzzleMap);
             }
         }
 
-        for (int cnt : puzzleMap.keySet()) {
-            for (int[][] puzzle : puzzleMap.get(cnt)) {
+        for(int cnt : puzzleMap.keySet()) {
+            for(int[][] puzzle : puzzleMap.get(cnt)) {
                 int[][] rotatedPuzzle = puzzle;
 
-                for (int i=0; i<=3; i++) {
+                for(int i=0; i<=3; i++) {
                     rotatedPuzzle = rotate(rotatedPuzzle);
                     boolean isChecked = false;
 
-                    if (boardMap.containsKey(cnt)) {
-                        for (int[][] board : boardMap.get(cnt)) {
-                            if (match(board, rotatedPuzzle)) {
+                    if(boardMap.containsKey(cnt)) {
+                        for(int[][] board : boardMap.get(cnt)) {
+                            if(match(board, rotatedPuzzle)) {
                                 answer += cnt;
                                 boardMap.get(cnt).remove(board);
                                 isChecked = true;
@@ -49,7 +49,7 @@ public class Solution {
                             }
                         }
                     }
-                    if (isChecked) break;
+                    if(isChecked) break;
                 }
             }
         }
@@ -59,8 +59,8 @@ public class Solution {
     // 퍼즐 조각 회전
     private int[][] rotate(int[][] puzzle) {
         int[][] temp = new int[puzzle[0].length][puzzle.length];
-        for (int i=0; i<puzzle.length; i++) {
-            for (int j=0; j<puzzle[0].length; j++) {
+        for(int i=0; i<puzzle.length; i++) {
+            for(int j=0; j<puzzle[0].length; j++) {
                 temp[j][puzzle.length-i-1] = puzzle[i][j];
             }
         }
@@ -69,9 +69,9 @@ public class Solution {
 
     // 빈칸과 퍼즐이 일치하는지 확인
     private boolean match(int[][] puzzle, int[][] rotatedPuzzle) {
-        if (puzzle.length != rotatedPuzzle.length || puzzle[0].length != rotatedPuzzle[0].length) return false;
-        for (int i=0; i<puzzle.length; i++) {
-            if (!Arrays.equals(puzzle[i], rotatedPuzzle[i])) return false;
+        if(puzzle.length != rotatedPuzzle.length || puzzle[0].length != rotatedPuzzle[0].length) return false;
+        for(int i=0; i<puzzle.length; i++) {
+            if(!Arrays.equals(puzzle[i], rotatedPuzzle[i])) return false;
         }
         return true;
     }
@@ -83,7 +83,7 @@ public class Solution {
         int minCol = Integer.MAX_VALUE;
         int maxCol = Integer.MIN_VALUE;
 
-        for (Point p : square) {
+        for(Point p : square) {
             minRow = Math.min(minRow, p.x);
             maxRow = Math.max(maxRow, p.x);
             minCol = Math.min(minCol, p.y);
@@ -95,7 +95,7 @@ public class Solution {
 
         int[][] gameBoard = new int[rowSize][colSize];
 
-        for (Point p : square) {
+        for(Point p : square) {
             int row = p.x;
             int col = p.y;
             gameBoard[row-minRow][col-minCol] = 1;
@@ -117,13 +117,13 @@ public class Solution {
         while (!queue.isEmpty()) {
             Point p = queue.poll();
 
-            for (int i=0; i<4; i++) {
+            for(int i=0; i<4; i++) {
                 int dx = p.x+dr[i];
                 int dy = p.y+dc[i];
 
-                if (dx<0 || dx>=len || dy<0 || dy>=len || visited[dx][dy]) continue;
+                if(dx<0 || dx>=len || dy<0 || dy>=len || visited[dx][dy]) continue;
 
-                if (board[dx][dy] == value) {
+                if(board[dx][dy] == value) {
                     visited[dx][dy] = true;
                     queue.add(new Point(dx, dy));
                     square.add(new Point(dx, dy));
