@@ -6,6 +6,7 @@ class Solution {
         StringBuilder sb = new StringBuilder();
         Stack<Character> st = new Stack<>();
         
+        // 앞에서부터 앞, 뒤 숫자 비교해서 뒤가 더 큰 경우 앞자리 수 제거
         for(int i=0; i<number.length(); i++){
             if(st.isEmpty()) {
                 st.push(number.charAt(i));
@@ -25,7 +26,9 @@ class Solution {
         
         while(!st.isEmpty()) sb.append(st.pop());
         
-        return k>0 ? number.substring(0, number.length()-k) : sb.reverse().toString();
+        // TC12는 앞자리 숫자가 뒷자리 숫자보다 작은 것이 없는 경우 뒤에서부터 차례대로 제거!
+        String answer = sb.reverse().toString();
+        return answer.substring(0, answer.length()-k);
     }
     
 }
