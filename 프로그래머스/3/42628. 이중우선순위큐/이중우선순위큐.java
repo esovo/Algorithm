@@ -13,7 +13,7 @@ class Solution {
                     minHeap.add(Integer.parseInt(str[1]));
                     break;
                 case "D": // 숫자 삭제
-                    if(Integer.parseInt(str[1]) == 1) {
+                    if(Integer.parseInt(str[1]) == 1){
                         if(maxHeap.isEmpty()) continue;
                         minHeap.remove(maxHeap.poll());
                     } 
