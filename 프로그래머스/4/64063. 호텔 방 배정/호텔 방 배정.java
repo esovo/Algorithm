@@ -13,7 +13,7 @@ class Solution {
             // 원하는 방이 비어있는 경우
             if(!map.containsKey(room_number[i])){
                 answer[i] = room;
-                map.put(room, findRoom(map, room + 1));
+                map.put(room, findRoom(map, room+1));
                 continue;
             }
             
@@ -26,8 +26,8 @@ class Solution {
         return answer;
     }
     
-    private long findRoom(Map<Long, Long> map, long room) {
-        if (!map.containsKey(room)) return room;
+    private long findRoom(Map<Long, Long> map, long room){
+        if(!map.containsKey(room)) return room;
         long next = findRoom(map, map.get(room));
         map.put(room, next);
         return next;
