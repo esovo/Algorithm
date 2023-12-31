@@ -28,9 +28,9 @@ class Solution {
         // Dijkstra 알고리즘 적용
         dist = new int[3][n];
         for(int i=0; i<3; i++) Arrays.fill(dist[i], Integer.MAX_VALUE);
-        dijkstra(s-1, 0, n); // S -> N
-        dijkstra(a-1, 1, n); // A -> N
-        dijkstra(b-1, 2, n); // B -> N
+        dijkstra(s-1, 0); // S -> N
+        dijkstra(a-1, 1); // A -> N
+        dijkstra(b-1, 2); // B -> N
         
         // (S -> N) + (A -> N) + (B -> N) 중 최소인 값 반환
         int answer = Integer.MAX_VALUE;
@@ -38,7 +38,7 @@ class Solution {
         return answer;
     }
     
-    private void dijkstra(int start, int idx, int n){
+    private void dijkstra(int start, int idx){
         PriorityQueue<Node> pq = new PriorityQueue<>();
         pq.offer(new Node(start, 0));
         dist[idx][start] = 0;
