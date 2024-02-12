@@ -7,8 +7,8 @@ class Solution {
         HashMap<Integer, int[]> map = new HashMap<>();
         
         for(int[] edge : edges){
-            if (!map.containsKey(edge[0])) map.put(edge[0], new int[]{0, 0});
-            if (!map.containsKey(edge[1])) map.put(edge[1], new int[]{0, 0});
+            if(!map.containsKey(edge[0])) map.put(edge[0], new int[]{0, 0});
+            if(!map.containsKey(edge[1])) map.put(edge[1], new int[]{0, 0});
             map.get(edge[0])[1]++;
             map.get(edge[1])[0]++;
         }
