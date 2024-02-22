@@ -12,7 +12,7 @@ class Solution {
         int answer = 1;
         if(coin == 0){
             boolean isContinue = true;
-            outer: while(isContinue && !init.isEmpty()){
+            outer: while(isContinue){
                 Set<Integer> keySet = init.keySet();
                 for(int key : keySet){
                     int value = init.get(key);
