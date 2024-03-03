@@ -19,15 +19,20 @@ class Solution {
         int maxWin = -1;
         int maxIdx = -1;
         for(int i=0; i<diceCombA.size(); i++){
-            int[] resultA = new int[N/2*100 + 1];
-            int[] resultB = new int[N/2*100 + 1];
+            int[] resultA = new int[N/2*100];
+            int[] resultB = new int[N/2*100];
             roll(resultA, diceCombA.get(i), 0, 0);
             roll(resultB, diceCombB.get(i), 0, 0);
             // B 주사위 조합에서 나올 수 있는 합에 대한 누적합
             for(int j=1; j<resultB.length; j++) resultB[j] += resultB[j-1];
             
             // 3. 승리 확률 계산
-            int wins = countWins(resultA, resultB);
+            int wins = 0;
+            for(int j=1; j<resultA.length; j++){
+                if(j < resultB.length){
+                    wins += resultA[j]*resultB[j-1];
+                }
+            }
             if (wins > maxWin){
                 maxWin = wins;
                 maxIdx = i;
@@ -39,16 +44,6 @@ class Solution {
         return answer;
     }
     
-    private int countWins(int[] resultA, int[] resultB){
-        int count = 0;
-        for(int i=1; i<resultA.length; i++){
-            if(i < resultB.length){
-                count += resultA[i]*resultB[i-1];
-            }
-        }
-        return count;
-    }
-    
     private void roll(int[] result, int[] dices, int cnt, int sum){
         if(cnt == N/2) {
             result[sum]++;
@@ -57,7 +52,7 @@ class Solution {
         
         int[] current = copyDice[dices[cnt]];
         for(int i = 0; i < 6; i++){
-            roll(result, dices, cnt + 1, sum + current[i]);
+            roll(result, dices, cnt+1, sum+current[i]);
         }
     }
     
