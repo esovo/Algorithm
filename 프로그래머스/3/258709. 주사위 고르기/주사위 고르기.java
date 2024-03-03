@@ -28,7 +28,7 @@ class Solution {
             
             // 3. 승리 확률 계산
             int wins = 0;
-            for(int j=1; j<resultA.length; j++)
+            for(int j=2; j<resultA.length; j++)
                 wins += resultA[j]*resultB[j-1];
             if (wins > maxWin){
                 maxWin = wins;
